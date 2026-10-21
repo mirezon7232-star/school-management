@@ -1,0 +1,1750 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>School | Student Management</title>
+
+<style>
+:root {
+  --navy: #102a43;
+  --blue: #1769aa;
+  --gold: #f2b544;
+  --ink: #172b4d;
+  --muted: #627d98;
+  --paper: #f4f8fc;
+  --line: #d9e2ec;
+  --green: #147d52;
+  --red: #b42318;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  color: var(--ink);
+  background: white;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 17px max(5%, calc((100% - 1180px) / 2));
+  background: #fff;
+  border-bottom: 1px solid #e8eef4;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.crest {
+  width: 45px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--navy);
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+  font-size: 23px;
+}
+
+.brand small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  margin-top: 3px;
+}
+
+.toplinks {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.toplinks a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.btn {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 18px;
+  font-weight: 750;
+  transition: .2s;
+}
+
+.primary {
+  background: var(--blue);
+  color: white;
+}
+
+.primary:hover {
+  background: #0f4f83;
+  transform: translateY(-1px);
+}
+
+.outline {
+  border: 1px solid #b8cce0;
+  color: var(--navy);
+  background: white;
+}
+
+/* Hero section */
+
+.hero {
+  background:
+    linear-gradient(112deg, #102a43f5, #174f79e8),
+    linear-gradient(45deg, #e8f4ff, #fff);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero:after {
+  content: "";
+  position: absolute;
+  width: 470px;
+  height: 470px;
+  border: 1px solid #ffffff26;
+  border-radius: 50%;
+  right: -80px;
+  top: -150px;
+  box-shadow: 0 0 0 45px #ffffff08, 0 0 0 90px #ffffff08;
+}
+
+.hero-inner {
+  max-width: 1180px;
+  margin: auto;
+  padding: 76px 24px 82px;
+  display: grid;
+  grid-template-columns: 1.4fr .8fr;
+  align-items: center;
+  gap: 55px;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #ffda88;
+}
+
+.eyebrow:before {
+  content: "";
+  width: 25px;
+  height: 2px;
+  background: var(--gold);
+}
+
+h1 {
+  font-size: clamp(36px, 5vw, 58px);
+  line-height: 1.08;
+  margin: 20px 0;
+}
+
+.hero p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #e0ebf5;
+  max-width: 640px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.hero .outline {
+  background: transparent;
+  border-color: #ffffff7d;
+  color: white;
+  text-decoration: none;
+}
+
+.hero-card {
+  background: #ffffff12;
+  border: 1px solid #ffffff30;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 28px;
+}
+
+.hero-card .mini {
+  font-size: 12px;
+  color: #c4d9eb;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+}
+
+.hero-card h2 {
+  font-size: 25px;
+  margin: 12px 0;
+}
+
+.hero-card p {
+  font-size: 14px;
+  margin: 0 0 20px;
+}
+
+.pill {
+  display: inline-block;
+  background: #f2b54420;
+  color: #ffdc94;
+  border: 1px solid #f2b54475;
+  border-radius: 30px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* Statistics */
+
+.stats {
+  max-width: 1100px;
+  margin: -28px auto 0;
+  position: relative;
+  z-index: 2;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.stat {
+  background: white;
+  border: 1px solid #e2eaf2;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 12px 30px #102a430d;
+}
+
+.stat strong {
+  display: block;
+  font-size: 22px;
+  color: var(--blue);
+  margin-bottom: 5px;
+}
+
+.stat span {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Features */
+
+section.info {
+  max-width: 1180px;
+  margin: auto;
+  padding: 74px 24px;
+}
+
+.section-head {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 35px;
+}
+
+.section-head .eyebrow {
+  color: var(--blue);
+}
+
+.section-head h2 {
+  font-size: 32px;
+  margin: 14px 0;
+}
+
+.section-head p {
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.feature {
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 25px;
+  background: white;
+}
+
+.icon {
+  width: 47px;
+  height: 47px;
+  display: grid;
+  place-items: center;
+  background: #e8f3fc;
+  border-radius: 12px;
+  font-size: 23px;
+}
+
+.feature h3 {
+  margin: 18px 0 9px;
+}
+
+.feature p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* About */
+
+.about {
+  background: var(--paper);
+}
+
+.about-inner {
+  max-width: 1180px;
+  margin: auto;
+  padding: 65px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 55px;
+  align-items: center;
+}
+
+.about h2 {
+  font-size: 31px;
+  margin: 12px 0;
+}
+
+.about p {
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.checklist {
+  display: grid;
+  gap: 12px;
+}
+
+.check {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.check span {
+  color: var(--green);
+  margin-right: 10px;
+}
+
+/* Login portal */
+
+.portal {
+  background: #f5f8fc;
+  padding: 72px 20px;
+}
+
+.portal-inner {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.portal h2 {
+  text-align: center;
+  font-size: 32px;
+  margin: 0 0 10px;
+}
+
+.portal-intro {
+  text-align: center;
+  color: var(--muted);
+  margin: 0 0 30px;
+}
+
+.login-grid {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 22px;
+  align-items: stretch;
+}
+
+.login-note,
+.login-box {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  padding: 28px;
+}
+
+.login-note {
+  background: var(--navy);
+  color: white;
+}
+
+.login-note h3 {
+  font-size: 23px;
+}
+
+.login-note p {
+  line-height: 1.8;
+  color: #d4e2ef;
+  font-size: 14px;
+}
+
+.login-box h3 {
+  margin-top: 0;
+}
+
+.field {
+  margin: 17px 0;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 750;
+  margin-bottom: 8px;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  padding: 12px 13px;
+  background: white;
+  outline: none;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px #1769aa18;
+}
+
+.login-box .btn {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.message {
+  display: none;
+  padding: 11px 13px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.message.error {
+  display: block;
+  background: #fff0ee;
+  color: var(--red);
+}
+
+.message.success {
+  display: block;
+  background: #e8f7ef;
+  color: var(--green);
+}
+
+/* Dashboard */
+
+.dashboard {
+  display: none;
+  max-width: 1180px;
+  margin: auto;
+  padding: 45px 22px 70px;
+}
+
+.dash-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.dash-head h2 {
+  margin: 0 0 5px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.dash-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.panel {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  min-width: 0;
+}
+
+.panel h3 {
+  margin-top: 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 15px;
+}
+
+.form-grid .field {
+  margin: 8px 0 13px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.table-wrap {
+  overflow: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  white-space: nowrap;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 13px 12px;
+  border-bottom: 1px solid #e8eef4;
+  font-size: 13px;
+}
+
+th {
+  background: #eff6fc;
+  color: #174f79;
+  font-size: 11px;
+  letter-spacing: .5px;
+}
+
+td .btn {
+  padding: 7px 9px;
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+td .danger {
+  background: #fff0ee;
+  color: var(--red);
+}
+
+/* Role based visibility (the body gets class "is-admin" for the owner and teachers) */
+
+body:not(.is-admin) .admin-only {
+  display: none;
+}
+
+body.is-admin .student-only {
+  display: none;
+}
+
+.search {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  max-width: 100%;
+  width: 300px;
+  margin-bottom: 14px;
+}
+
+/* One-time login details box */
+
+.cred {
+  display: none;
+  background: #fff8e6;
+  border: 1px solid #f2d089;
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+}
+
+.cred .row {
+  margin: 9px 0;
+  font-size: 14px;
+}
+
+.cred code {
+  background: white;
+  border: 1px solid #ecd9a8;
+  border-radius: 6px;
+  padding: 3px 9px;
+  font-size: 15px;
+  user-select: all;
+}
+
+/* Footer */
+
+.footer {
+  background: #0b2033;
+  color: #c7d7e5;
+  text-align: center;
+  padding: 25px;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.footer strong {
+  color: white;
+}
+
+/* Mobile responsive */
+
+@media (max-width: 760px) {
+  .top {
+    padding: 14px 17px;
+  }
+
+  .toplinks a:not(.btn) {
+    display: none;
+  }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+    padding: 55px 22px;
+    gap: 28px;
+  }
+
+  .hero-card {
+    max-width: 500px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+    margin-top: 15px;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-inner,
+  .login-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-inner {
+    gap: 20px;
+    padding: 45px 22px;
+  }
+
+  .info {
+    padding: 50px 20px !important;
+  }
+
+  .section-head h2,
+  .portal h2 {
+    font-size: 27px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brand {
+    font-size: 15px;
+  }
+
+  .crest {
+    width: 38px;
+    height: 41px;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="top" id="siteTop">
+  <div class="brand">
+    <div class="crest">✦</div>
+    <div>
+      School
+      <small>LEARN · GROW · LEAD</small>
+    </div>
+  </div>
+
+  <nav class="toplinks">
+    <a href="#about">About</a>
+    <a href="#features">Facilities</a>
+    <a href="#portal">Portal</a>
+    <button class="btn primary" onclick="goLogin()">Login ↗</button>
+  </nav>
+</header>
+
+<div id="publicSite">
+  <main>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">Welcome to our school community</div>
+
+          <h1>
+            Inspiring young minds.<br>
+            Build a bright future.
+          </h1>
+
+          <p>
+            A welcoming place to learn, discover talents, build confidence
+            and prepare for tomorrow. Our School helps teachers manage
+            student records and lets students view their information easily.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn primary" onclick="goLogin()">
+              Access School →
+            </button>
+
+            <a class="btn outline" href="#about">
+              Discover our school
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <span class="pill">SCHOOL · LEARNING · COMMUNITY</span>
+
+          <div class="mini" style="margin-top:22px">
+            A place to belong
+          </div>
+
+          <h2>Every learner matters.</h2>
+
+          <p>
+            We value curiosity, respect, discipline and a supportive
+            learning environment.
+          </p>
+
+          <div style="border-top:1px solid #ffffff30;padding-top:16px;font-size:13px">
+            📚 Academic growth &nbsp; · &nbsp; 🤝 Strong values
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="stats">
+      <div class="stat">
+        <strong>Quality Learning</strong>
+        <span>Encouraging curiosity and understanding</span>
+      </div>
+
+      <div class="stat">
+        <strong>Student First</strong>
+        <span>Supporting each learner's progress</span>
+      </div>
+
+      <div class="stat">
+        <strong>Connected School</strong>
+        <span>Simple digital student records</span>
+      </div>
+    </div>
+
+    <section class="info" id="features">
+      <div class="section-head">
+        <div class="eyebrow">What we focus on</div>
+
+        <h2>A supportive environment for success</h2>
+
+        <p>
+          These are sample introductory details for a beginner school website.
+          Replace them with your school's verified information, facilities
+          and achievements.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="icon">📘</div>
+          <h3>Academic Excellence</h3>
+          <p>
+            Build strong foundations through consistent study, helpful
+            guidance and a love of learning.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="icon">🧪</div>
+          <h3>Learning by Doing</h3>
+          <p>
+            Encourage students to ask questions, explore ideas and develop
+            practical problem-solving skills.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="icon">🌱</div>
+          <h3>Character & Care</h3>
+          <p>
+            Promote respect, responsibility, teamwork and a safe,
+            inclusive school environment.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="about-inner">
+        <div>
+          <div class="eyebrow" style="color:#1769aa">
+            About our school
+          </div>
+
+          <h2>Helping every student move forward.</h2>
+
+          <p>
+            Our school community aims to help learners grow academically,
+            socially and personally. We believe education works best when
+            teachers, students and families work together.
+          </p>
+
+          <p>
+            This is sample website content. Update it with your school's
+            real name, history, mission, address and contact information.
+          </p>
+
+          <button class="btn primary" onclick="goLogin()">
+            Enter School Login →
+          </button>
+        </div>
+
+        <div class="checklist">
+          <div class="check">
+            <span>✓</span> Supportive teaching and learning
+          </div>
+
+          <div class="check">
+            <span>✓</span> Student-focused education
+          </div>
+
+          <div class="check">
+            <span>✓</span> Respect, discipline and responsibility
+          </div>
+
+          <div class="check">
+            <span>✓</span> Teacher and student digital portal
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="portal" id="portal">
+      <div class="portal-inner">
+        <h2>School Login</h2>
+
+        <p class="portal-intro">
+          Sign in with your account to continue.
+        </p>
+
+        <div class="login-grid">
+          <aside class="login-note">
+            <div class="eyebrow">Your portal</div>
+
+            <h3>One portal, two experiences.</h3>
+
+            <p>
+              <strong>Teachers</strong><br>
+              Manage student and teacher accounts, add new students,
+              update details and remove records.
+            </p>
+
+            <p>
+              <strong>Students</strong><br>
+              Sign in with the username and password your school gave you
+              to see your own information and the student list.
+            </p>
+          </aside>
+
+          <div class="login-box">
+            <h3>Sign in to your account</h3>
+
+            <div id="loginMessage" class="message" role="alert"></div>
+
+            <form id="loginForm">
+              <div class="field">
+                <label for="username">Username</label>
+                <input
+                  id="username"
+                  name="username"
+                  autocomplete="username"
+                  required
+                  placeholder="Enter username"
+                >
+              </div>
+
+              <div class="field">
+                <label for="password">Password</label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="current-password"
+                  required
+                  placeholder="Enter password"
+                >
+              </div>
+
+              <button
+                class="btn primary"
+                id="loginButton"
+                type="submit"
+              >
+                Secure Login →
+              </button>
+            </form>
+
+            <p class="hint">
+              Lost your password? Ask your school administrator for a new one.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Dashboard -->
+
+<section id="dashboard" class="dashboard">
+
+  <div class="dash-head">
+    <div>
+      <h2>Student Management Dashboard</h2>
+      <div class="muted" id="welcomeUser">Welcome</div>
+    </div>
+
+    <button class="btn outline" onclick="logout()">
+      Log out ↗
+    </button>
+  </div>
+
+  <div id="dashMessage" class="message" role="status"></div>
+
+  <!-- Shown once after an account is created or a password is reset -->
+  <div id="credBox" class="cred" role="status">
+    <strong id="credTitle"></strong>
+
+    <div class="row">Username: <code id="credUser"></code></div>
+    <div class="row">Password: <code id="credPass"></code></div>
+
+    <p class="hint">
+      Save these details now. The password is stored in scrambled form
+      and cannot be shown again. If it is lost, use "Reset password".
+    </p>
+
+    <button class="btn outline" type="button" onclick="copyCreds()">Copy</button>
+    <button class="btn primary" type="button" onclick="hideCreds()">Done</button>
+  </div>
+
+  <div
+    class="stats"
+    style="max-width:none;margin:0 0 22px;padding:0"
+  >
+    <div class="stat">
+      <strong id="totalStudents">0</strong>
+      <span>Total student records</span>
+    </div>
+
+    <div class="stat">
+      <strong id="roleLabel">—</strong>
+      <span>Your access level</span>
+    </div>
+
+    <div class="stat">
+      <strong>Connected</strong>
+      <span>School status</span>
+    </div>
+  </div>
+
+  <div class="dash-grid">
+
+    <!-- Admin-only student form -->
+
+    <section class="panel admin-only" id="studentFormPanel">
+      <h3 id="formTitle">＋ Add a student</h3>
+
+      <form id="studentForm">
+        <input type="hidden" id="studentId">
+
+        <div class="form-grid">
+
+          <div class="field">
+            <label for="name">Student name *</label>
+            <input
+              id="name"
+              required
+              maxlength="100"
+              placeholder="Full name"
+            >
+          </div>
+
+          <div class="field">
+            <label for="roll">Roll number *</label>
+            <input
+              id="roll"
+              type="number"
+              min="1"
+              required
+              placeholder="e.g. 12"
+            >
+          </div>
+
+          <div class="field">
+            <label for="className">Class *</label>
+            <input
+              id="className"
+              required
+              maxlength="50"
+              placeholder="e.g. Class 8"
+            >
+          </div>
+
+          <div class="field">
+            <label for="guardian">Guardian name</label>
+            <input
+              id="guardian"
+              maxlength="100"
+              placeholder="Parent or guardian"
+            >
+          </div>
+
+        </div>
+
+        <p class="hint">
+          A login username and password are created automatically
+          when you add a new student.
+        </p>
+
+        <div class="form-actions">
+          <button class="btn primary" id="saveButton" type="submit">
+            Save student
+          </button>
+
+          <button
+            class="btn outline"
+            type="button"
+            onclick="resetStudentForm()"
+          >
+            Clear form
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Student-only: own information -->
+
+    <section class="panel student-only" id="myInfoPanel">
+      <h3>My information</h3>
+      <div class="checklist" id="myInfo"></div>
+    </section>
+
+    <!-- Student directory -->
+
+    <section class="panel">
+
+      <div
+        style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"
+      >
+        <h3>Student directory</h3>
+
+        <button class="btn outline" onclick="loadStudents()">
+          ↻ Refresh
+        </button>
+      </div>
+
+      <input
+        class="search"
+        id="searchInput"
+        type="search"
+        placeholder="Search students…"
+      >
+
+      <div class="table-wrap">
+        <table>
+          <thead id="studentHead"></thead>
+
+          <tbody id="studentTable">
+            <tr>
+              <td colspan="2">Loading…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="hint" id="tableHint"></p>
+
+    </section>
+
+    <!-- Teachers -->
+
+    <section class="panel" id="teachersPanel">
+      <h3>Teachers</h3>
+
+      <form id="teacherForm" class="admin-only">
+        <div class="form-grid">
+
+          <div class="field">
+            <label for="tName">Teacher name *</label>
+            <input id="tName" required maxlength="100" placeholder="Full name">
+          </div>
+
+          <div class="field">
+            <label for="tSubject">Subject</label>
+            <input id="tSubject" maxlength="100" placeholder="e.g. Mathematics">
+          </div>
+
+          <div class="field">
+            <label for="tUser">Login username *</label>
+            <input
+              id="tUser"
+              required
+              minlength="3"
+              maxlength="30"
+              autocomplete="off"
+              placeholder="letters and numbers"
+            >
+          </div>
+
+          <div class="field">
+            <label for="tPass">Password * (at least 6 characters)</label>
+            <input
+              id="tPass"
+              type="password"
+              required
+              minlength="6"
+              maxlength="72"
+              autocomplete="new-password"
+            >
+          </div>
+
+        </div>
+
+        <p class="hint">
+          A teacher you add becomes an admin: they can manage students
+          and teachers. Only add people you trust.
+        </p>
+
+        <div class="form-actions">
+          <button class="btn primary" type="submit">Add teacher</button>
+        </div>
+      </form>
+
+      <div class="table-wrap" style="margin-top:14px">
+        <table>
+          <thead id="teacherHead"></thead>
+          <tbody id="teacherTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <strong>School</strong><br>
+  Sample school website and student management system · Replace sample content before publishing.
+</footer>
+
+<script>
+const API = "/api";
+
+let students = [];
+let teachers = [];
+let currentUser = null;
+
+const $ = id => document.getElementById(id);
+const isAdmin = () => !!currentUser && currentUser.role === "admin";
+
+function goLogin() {
+  $("portal").scrollIntoView({ behavior: "smooth" });
+
+  setTimeout(() => {
+    $("username").focus({ preventScroll: true });
+  }, 350);
+}
+
+function showMessage(id, text, type = "success") {
+  const el = $(id);
+
+  el.textContent = text;
+  el.className = "message " + type;
+
+  setTimeout(() => {
+    el.className = "message";
+    el.textContent = "";
+  }, 5000);
+}
+
+async function api(url, options = {}) {
+  const res = await fetch(url, {
+    credentials: "same-origin",
+    ...options
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text.trim() || "Request failed (" + res.status + ")");
+  }
+
+  if (res.status === 204) {
+    return null;
+  }
+
+  const type = res.headers.get("content-type") || "";
+
+  return type.includes("application/json")
+    ? res.json()
+    : null;
+}
+
+function jsonRequest(method, body) {
+  return {
+    method,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  };
+}
+
+
+function setHead(id, columns) {
+  const tr = document.createElement("tr");
+
+  columns.forEach(c => {
+    const th = document.createElement("th");
+    th.textContent = c;
+    tr.append(th);
+  });
+
+  $(id).replaceChildren(tr);
+}
+
+function textRow(values) {
+  const tr = document.createElement("tr");
+
+  values.forEach(v => {
+    const td = document.createElement("td");
+    td.textContent = v;
+    tr.append(td);
+  });
+
+  return tr;
+}
+
+function actionButton(label, onClick, danger) {
+  const b = document.createElement("button");
+
+  b.className = danger ? "btn danger" : "btn outline";
+  b.textContent = label;
+  b.onclick = onClick;
+
+  return b;
+}
+
+function emptyRow(columns, text) {
+  const tr = document.createElement("tr");
+  const td = document.createElement("td");
+
+  td.colSpan = columns;
+  td.textContent = text;
+  tr.append(td);
+
+  return tr;
+}
+
+
+
+function showCreds(title, username, password) {
+  $("credTitle").textContent = title;
+  $("credUser").textContent = username;
+  $("credPass").textContent = password;
+  $("credBox").style.display = "block";
+  $("credBox").scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function hideCreds() {
+  $("credBox").style.display = "none";
+  $("credUser").textContent = "";
+  $("credPass").textContent = "";
+}
+
+async function copyCreds() {
+  const text =
+    "Username: " + $("credUser").textContent +
+    "\nPassword: " + $("credPass").textContent;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    showMessage("dashMessage", "Copied.");
+  } catch (e) {
+    showMessage("dashMessage", "Could not copy. Please write the details down.", "error");
+  }
+}
+
+
+
+$("loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const btn = $("loginButton");
+
+  btn.disabled = true;
+  btn.textContent = "Signing in…";
+
+  try {
+    currentUser = await api(API + "/login", jsonRequest("POST", {
+      username: $("username").value,
+      password: $("password").value
+    }));
+
+    $("loginForm").reset();
+    await enterDashboard();
+
+  } catch (err) {
+    showMessage("loginMessage", err.message, "error");
+
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Secure Login →";
+  }
+});
+
+
+function showDashboard() {
+  const label = isAdmin()
+    ? (currentUser.owner ? "Admin" : "Teacher (Admin)")
+    : "Student";
+
+  $("publicSite").style.display = "none";
+  $("siteTop").style.display = "none";
+  $("dashboard").style.display = "block";
+
+  document.body.classList.toggle("is-admin", isAdmin());
+
+  $("welcomeUser").textContent =
+    "Signed in as " + (currentUser.name || currentUser.username) + " · " + label;
+
+  $("roleLabel").textContent = label;
+
+  $("tableHint").textContent = isAdmin()
+    ? "Admin mode: you can add, edit and delete student records. Records are kept in memory and reset when the server restarts."
+    : "Student mode: you can see every student's name and roll number, and all of your own information. Only teachers can make changes.";
+
+  hideCreds();
+}
+
+async function enterDashboard() {
+  showDashboard();
+  await Promise.all([loadStudents(), loadTeachers()]);
+}
+
+
+
+async function loadStudents() {
+  try {
+    const data = await api(API + "/students");
+
+    students = Array.isArray(data) ? data : [];
+
+    renderStudents();
+    renderMyInfo();
+
+  } catch (err) {
+    showMessage("dashMessage", err.message, "error");
+  }
+}
+
+function renderStudents() {
+  const admin = isAdmin();
+  const q = $("searchInput").value.trim().toLowerCase();
+
+  const columns = admin
+    ? ["ID", "NAME", "ROLL", "CLASS", "GUARDIAN", "USERNAME", "ACTIONS"]
+    : ["NAME", "ROLL"];
+
+  setHead("studentHead", columns);
+
+  const list = students.filter(s =>
+    (admin
+      ? [s.id, s.name, s.roll, s.class, s.guardian || "", s.username || ""]
+      : [s.name, s.roll]
+    ).some(v => String(v).toLowerCase().includes(q))
+  );
+
+  $("totalStudents").textContent = students.length;
+
+  const body = $("studentTable");
+
+  body.replaceChildren();
+
+  if (!list.length) {
+    body.append(emptyRow(
+      columns.length,
+      students.length ? "No matching records." : "No students added yet."
+    ));
+    return;
+  }
+
+  list.forEach(s => {
+    const tr = admin
+      ? textRow([s.id, s.name, s.roll, s.class, s.guardian || "—", s.username || "—"])
+      : textRow([s.name + (s.own ? " (you)" : ""), s.roll]);
+
+    if (admin) {
+      const td = document.createElement("td");
+
+      td.append(
+        actionButton("Edit", () => editStudent(s)),
+        actionButton("Reset password", () => resetPassword(s.username, s.name)),
+        actionButton("Delete", () => deleteStudent(s.id), true)
+      );
+
+      tr.append(td);
+    }
+
+    body.append(tr);
+  });
+}
+
+function renderMyInfo() {
+  const box = $("myInfo");
+
+  box.replaceChildren();
+
+  if (isAdmin()) {
+    return;
+  }
+
+  const me = students.find(s => s.own);
+
+  if (!me) {
+    box.textContent = "No student record is linked to this account.";
+    return;
+  }
+
+  [
+    ["Name", me.name],
+    ["Roll", me.roll],
+    ["Class", me.class],
+    ["Guardian", me.guardian || "—"],
+    ["Student ID", me.id],
+    ["Login username", me.username]
+  ].forEach(([label, value]) => {
+    const row = document.createElement("div");
+    const b = document.createElement("strong");
+
+    row.className = "check";
+    b.textContent = label + ": ";
+
+    row.append(b, document.createTextNode(String(value)));
+    box.append(row);
+  });
+}
+
+$("searchInput").addEventListener("input", renderStudents);
+
+
+
+$("studentForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  if (!isAdmin()) {
+    return;
+  }
+
+  const id = $("studentId").value;
+
+  const student = {
+    name: $("name").value.trim(),
+    roll: Number($("roll").value),
+    class: $("className").value.trim(),
+    guardian: $("guardian").value.trim()
+  };
+
+  try {
+    const saved = await api(
+      id
+        ? API + "/student?id=" + encodeURIComponent(id)
+        : API + "/students",
+      jsonRequest(id ? "PUT" : "POST", student)
+    );
+
+    resetStudentForm();
+
+    if (id) {
+      showMessage("dashMessage", "Student updated.");
+    } else {
+      showCreds("Student added: " + saved.name, saved.username, saved.password);
+    }
+
+    await loadStudents();
+
+  } catch (err) {
+    showMessage("dashMessage", err.message, "error");
+  }
+});
+
+function editStudent(s) {
+  $("studentId").value = s.id;
+  $("name").value = s.name;
+  $("roll").value = s.roll;
+  $("className").value = s.class;
+  $("guardian").value = s.guardian || "";
+
+  $("formTitle").textContent = "Edit student #" + s.id;
+  $("saveButton").textContent = "Update student";
+
+  $("studentFormPanel").scrollIntoView({ behavior: "smooth" });
+}
+
+async function deleteStudent(id) {
+  if (!confirm("Delete student ID " + id + "? Their login will be removed too.")) {
+    return;
+  }
+
+  try {
+    await api(API + "/student?id=" + encodeURIComponent(id), {
+      method: "DELETE"
+    });
+
+    showMessage("dashMessage", "Student deleted.");
+
+    await loadStudents();
+
+  } catch (err) {
+    showMessage("dashMessage", err.message, "error");
+  }
+}
+
+function resetStudentForm() {
+  $("studentForm").reset();
+  $("studentId").value = "";
+
+  $("formTitle").textContent = "＋ Add a student";
+  $("saveButton").textContent = "Save student";
+}
+
+/* Teachers */
+
+async function loadTeachers() {
+  try {
+    const data = await api(API + "/teachers");
+
+    teachers = Array.isArray(data) ? data : [];
+
+    renderTeachers();
+
+  } catch (err) {
+    showMessage("dashMessage", err.message, "error");
+  }
+}
+
+function renderTeachers() {
+  const admin = isAdmin();
+
+  const columns = admin
+    ? ["NAME", "SUBJECT", "USERNAME", "ACTIONS"]
+    : ["NAME", "SUBJECT"];
+
+  setHead("teacherHead", columns);
+
+  const body = $("teacherTable");
+
+  body.replaceChildren();
+
+  if (!teachers.length) {
+    body.append(emptyRow(columns.length, "No teachers added yet."));
+    return;
+  }
+
+  teachers.forEach(t => {
+    const tr = admin
+      ? textRow([t.name, t.subject || "—", t.username])
+      : textRow([t.name, t.subject || "—"]);
+
+    if (admin) {
+      const td = document.createElement("td");
+
+      td.append(
+        actionButton("Reset password", () => resetPassword(t.username, t.name)),
+        actionButton("Remove", () => removeTeacher(t.username, t.name), true)
+      );
+
+      tr.append(td);
+    }
+
+    body.append(tr);
+  });
+}
+
+$("teacherForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  if (!isAdmin()) {
+    return;
+  }
+
+  try {
+    await api(API + "/teachers", jsonRequest("POST", {
+      name: $("tName").value.trim(),
+      subject: $("tSubject").value.trim(),
+      username: $("tUser").value.trim(),
+      password: $("tPass").value
+    }));
+
+    $("teacherForm").reset();
+
+    showMessage("dashMessage", "Teacher added. They now have admin access.");
+
+    await loadTeachers();
+
+  } catch (err) {
+    showMessage("dashMessage", err.message, "error");
+  }
+});
+
+async function removeTeacher(username, name) {
+  if (!confirm("Remove teacher " + name + "? They will lose access immediately.")) {
+    return;
+  }
+
+  try {
+    await api(API + "/teacher?username=" + encodeURIComponent(username), {
+      method: "DELETE"
+    });
+
+    showMessage("dashMessage", "Teacher removed.");
+
+    await loadTeachers();
+
+  } catch (err) {
+    showMessage("dashMessage", err.message, "error");
+  }
+}
+
+
+
+async function resetPassword(username, name) {
+  if (!confirm("Create a new password for " + name + "? The old password will stop working.")) {
+    return;
+  }
+
+  try {
+    const r = await api(
+      API + "/reset-password?username=" + encodeURIComponent(username),
+      { method: "POST" }
+    );
+
+    showCreds("New password for " + name, r.username, r.password);
+
+  } catch (err) {
+    showMessage("dashMessage", err.message, "error");
+  }
+}
+
+
+
+async function logout() {
+  try {
+    await api(API + "/logout", {
+      method: "POST"
+    });
+  } catch (e) {
+   
+  }
+
+  currentUser = null;
+  students = [];
+  teachers = [];
+
+  hideCreds();
+  document.body.classList.remove("is-admin");
+
+  $("dashboard").style.display = "none";
+  $("publicSite").style.display = "block";
+  $("siteTop").style.display = "flex";
+
+  $("loginForm").reset();
+
+  $("portal").scrollIntoView({ behavior: "smooth" });
+}
+
+
+(async () => {
+  try {
+    currentUser = await api("/api/me");
+
+    await enterDashboard();
+
+  } catch (e) {
+    
+  }
+})();
+</script>
+
+</body>
+</html>
